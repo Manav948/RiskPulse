@@ -1,0 +1,15 @@
+{
+  "input": {
+    "projectId": "string",
+    "commitsLast7Days": "number",
+    "daysToDeadline": "number",
+    "taskCompletionRate": "number",
+    "openBugs": "number"
+  },
+  "output": {
+    "failureRisk": "number",
+    "confidence": "number",
+    "topReasons": ["string"],
+    "recommendations": ["string"]
+  }
+}
