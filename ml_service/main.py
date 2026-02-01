@@ -10,11 +10,18 @@ Behavior:
 from fastapi import FastAPI, HTTPException
 from typing import List
 import numpy as np
+import sys
+from pathlib import Path
+
+# Ensure ml_service is in path for imports
+sys_path = str(Path(__file__).parent)
+if sys_path not in sys.path:
+    sys.path.insert(0, sys_path)
+
 from schemas import RiskInput, RiskOutput
 from preprocessing import build_feature_frame, load_scaler, scale_features
 from model import RiskModel
-import train as trainer
-from pathlib import Path
+from train import train_and_persist
 
 
 app = FastAPI(title="RiskPulse ML Service")
@@ -25,7 +32,7 @@ def ensure_model():
     scaler = load_scaler()
     if model is None or scaler is None:
         # Train and persist a model if artifacts are missing
-        trainer.train_and_persist()
+        train_and_persist()
         model = RiskModel.load()
         scaler = load_scaler()
     return model, scaler
