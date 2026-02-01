@@ -1,0 +1,16 @@
+{
+  "endpoint": "/predict-risk",
+  "method": "POST",
+  "request": {
+    "commitsLast7Days": "number",
+    "deadlineDays": "number",
+    "taskCompletionRate": "number",
+    "openBugs": "number"
+  },
+  "response": {
+    "failureRisk": "number",
+    "confidence": "number",
+    "topReasons": ["string"],
+    "recommendations": ["string"]
+  }
+}
